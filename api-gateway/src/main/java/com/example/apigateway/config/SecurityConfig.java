@@ -15,9 +15,6 @@ public class SecurityConfig {
         http
             .csrf(ServerHttpSecurity.CsrfSpec::disable)
             .authorizeExchange(exchanges -> exchanges
-                .pathMatchers("/api/users/register").permitAll()
-                // The API gateway will proxy these requests to the user service
-                // The actual security rules are applied at the user service level
                 .anyExchange().permitAll()
             );
 

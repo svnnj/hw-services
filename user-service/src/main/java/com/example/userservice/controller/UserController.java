@@ -2,6 +2,7 @@ package com.example.userservice.controller;
 
 import com.example.userservice.dto.UserRegistrationRequest;
 import com.example.userservice.dto.UserResponse;
+import com.example.userservice.dto.AuthenticationRequest;
 import com.example.userservice.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,16 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<UserResponse> registerUser(@Valid @RequestBody UserRegistrationRequest request) {
         return ResponseEntity.ok(userService.registerUser(request));
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthenticationRequest request) {
+        boolean isAuthenticated = userService.authenticateUser(request.getLogin(), request.getPassword());
+        if (isAuthenticated) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(401).build();
+        }
     }
 
     @GetMapping("/{login}")

@@ -38,6 +38,13 @@ public class UserService {
         return convertToUserResponse(user);
     }
 
+    public boolean authenticateUser(String login, String password) {
+        return userRepository.findByLogin(login)
+                .filter(user -> !user.isBlocked())
+                .map(user -> passwordEncoder.matches(password, user.getPassword()))
+                .orElse(false);
+    }
+
     public UserResponse getUserByLogin(String login) {
         User user = userRepository.findByLogin(login)
                 .orElseThrow(() -> new RuntimeException("User not found"));

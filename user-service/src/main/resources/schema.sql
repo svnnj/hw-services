@@ -1,4 +1,3 @@
--- Drop tables if they exist
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS roles;
 
@@ -19,11 +18,9 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Add foreign key constraint
 ALTER TABLE users ADD CONSTRAINT fk_users_roles 
 FOREIGN KEY (role_id) REFERENCES roles(id);
 
--- Insert default roles with Oracle-compatible syntax
 INSERT INTO roles (name, description) 
 SELECT 'admin', 'Administrator' FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM roles WHERE name = 'admin');

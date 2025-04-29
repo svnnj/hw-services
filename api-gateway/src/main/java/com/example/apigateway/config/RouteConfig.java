@@ -20,13 +20,18 @@ public class RouteConfig {
             .route("user_service_register", r -> r.path("/api/users/register")
                 .uri("http://localhost:8080"))
             
-            // Protected routes that require authentication
+            // User Service routes
             .route("user_service_get_user", r -> r.path("/api/users/{login}")
                 .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
                 .uri("http://localhost:8080"))
             .route("user_service_current_user", r -> r.path("/api/users/me")
                 .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
                 .uri("http://localhost:8080"))
+                
+            // Client Service routes
+            .route("client_service_all", r -> r.path("/api/clients/**")
+                .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                .uri("http://localhost:8081"))
             .build();
     }
 } 
