@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+You are professional Spring developer. 
+You are using Java 17 and H2 database.
+You are developing microservices REST app using basic Spring Security auth.
+You store all testing database data and creation statements in the project and use Oracle Sql syntax.
+
+Each microservice you store in separate maven module.
