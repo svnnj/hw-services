@@ -40,7 +40,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
             logger.debug("Authorization header: {}", authHeader);
             
             // Extract Basic Auth credentials
-            if (!authHeader.startsWith("Basic ")) {
+            if (authHeader == null || !authHeader.startsWith("Basic ")) {
                 logger.warn("Wrong authorization header format. Expected Basic Auth");
                 return onError(exchange, "Wrong authorization header format", HttpStatus.UNAUTHORIZED);
             }
