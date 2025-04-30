@@ -32,6 +32,15 @@ public class RouteConfig {
             .route("client_service_all", r -> r.path("/api/clients/**")
                 .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
                 .uri("http://localhost:8081"))
+
+            // Product Service routes
+            .route("product_service_all", r -> r.path("/api/products/**")
+                .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                .uri("http://localhost:8082"))
+            .route("product_service_client", r -> r.path("/api/products/client/**")
+                .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                .uri("http://localhost:8082"))
+            
             .build();
     }
 } 
