@@ -41,6 +41,14 @@ public class RouteConfig {
                 .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
                 .uri("http://localhost:8082"))
             
+            // Client Offer Service routes
+            .route("client_offer_service_all", r -> r.path("/api/offers/**")
+                .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                .uri("http://localhost:8083"))
+            .route("client_offer_service_client", r -> r.path("/api/offers/client/**")
+                .filters(f -> f.filter(authenticationFilter.apply(new AuthenticationFilter.Config())))
+                .uri("http://localhost:8083"))
+            
             .build();
     }
 } 
